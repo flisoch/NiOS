@@ -14,7 +14,7 @@ all: os.iso
 kernel.elf: $(OBJECTS)
 	ld $(LDFLAGS) $(OBJECTS_WITH_PREFIX) -o $(BUILD_DIR)/kernel.elf
 
-os.iso: build_kernel build_libc
+os.iso: build_kernel build_libc build_apps
 	cp kernel/kernel.elf ../iso/boot/kernel.elf
 	genisoimage -R                              \
 				-b boot/grub/stage2_eltorito    \
@@ -54,6 +54,7 @@ clean:
 	@echo ''
 	@echo '-> Cleaning libc'
 	@make --no-print-directory -C libc clean
+	rm -rf *.iso *.elf *.out
 	@echo ''
 
 %.o: %.c

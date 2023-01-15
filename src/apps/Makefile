@@ -1,13 +1,19 @@
+OBJECTS = program
 
-all:
-	@echo 'Nothing to build'
-	@echo ''
+AS = nasm
+ASFLAGS = -f bin
+
+all: $(OBJECTS)
+	cp program ../../iso/modules
 
 clean:
-	rm -rf *.o *.elf
+	rm -rf *.o *.elf $(OBJECTS)
 
 %.o: %.c
-	$(CC) $(CFLAGS)  $< -o $(BUILD_DIR)/$@
+	$(CC) $(CFLAGS)  $< -o $@
 
 %.o: %.s
-	$(AS) $(ASFLAGS) $< -o $(BUILD_DIR)/$@
+	$(AS) $(ASFLAGS) $< -o $@
+
+%: %.s
+	$(AS) $(ASFLAGS) $< -o $@

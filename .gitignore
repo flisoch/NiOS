@@ -3,5 +3,5 @@ build
 com1.out
 bochslog.txt
 os.iso
-iso/boot/kernel.elf
+*.elf
 *.o
