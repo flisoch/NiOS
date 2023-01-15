@@ -1,6 +1,8 @@
 #ifndef FB_H
 #define FB_H
 
+#define FB_BACKSPACE_ASCII 8
+
 /* framebuffer base memory address */
 #define FB_BASE_ADDRESS 0x000B8000
 
@@ -24,14 +26,15 @@
  * @param fg foreground color from 0 to 15
  * @param bg background color from 0 to 15
  */
-void fb_write_cell(unsigned int i, char c, unsigned char fg, unsigned char bg);
+void fb_write_cell_pos(unsigned int i, char c, unsigned char fg, unsigned char bg);
 
 /** fb_move_cursor:
- *  Moves the cursor of the framebuffer to the given position
+ *  Moves the cursor of the framebuffer to the position of given row and col
  *
- *  @param pos The new position of the cursor
+ *  @param row The new position row
+ *  @param col The new position column
  */
-void fb_move_cursor(unsigned short pos);
+void fb_move_cursor(unsigned short row, unsigned short col);
 
 /**
  * @brief writes the contents of the buffer buf with length len to the framebuffer
@@ -41,4 +44,10 @@ void fb_move_cursor(unsigned short pos);
  * @return int 
  */
 int fb_write(char *buf, unsigned int len);
+
+void fb_put_b(unsigned char b);
+void fb_put_ui(unsigned int ui);
+void fb_put_ui_hex(unsigned int hex);
+void fb_put_s(char const* s);
+
 #endif /* FB_H */

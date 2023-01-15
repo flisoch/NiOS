@@ -43,10 +43,10 @@ void interrupt_handler(__attribute__((unused)) struct cpu_state cpu,
       char str[1];
       str[0] = ascii;
       if (scan_code == 14) {
-        // BUFFER_COUNT--;
+        fb_put_b(FB_BACKSPACE_ASCII);
       } else {
         serial_write(COM1, str, 1);
-        // BUFFER_COUNT++;
+        fb_put_b(ascii);
       }
     }
     pic_acknowledge(interrupt);
